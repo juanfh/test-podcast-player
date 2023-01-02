@@ -57,6 +57,7 @@ export default function IndexApp(props: WebSectionProps) {
                   <Image src={podcast.image} alt={podcast.title} width={300} height={300} />
                 </div>
                 <div className="text-xs">{podcast.title}</div>
+                <div>{podcast.author}</div>
               </div>
             ))}
           </div>

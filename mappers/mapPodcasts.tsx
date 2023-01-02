@@ -4,6 +4,7 @@ export const mapPodcast = (podcast: any): PodcastProps => {
   return {
     id: podcast?.id?.attributes['im:id'] || '',
     title: podcast['im:name']?.label || '',
+    author: podcast['im:artist']?.label || '',
     summary: podcast?.summary?.label || '',
     image: podcast['im:image'][2]?.label || '',
     link: podcast?.link?.attributes?.href || '',
