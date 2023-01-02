@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import Image from "next/image"
 
 import { LocaleProps, WebSectionProps } from "../types/navigation"
 
@@ -47,7 +48,20 @@ export default function IndexApp(props: WebSectionProps) {
         <meta name="twitter:description" content={maintexts.mainSeoDescription} />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_HOST} />
       </Head>
-      CONTAINER
+      <div className="grid grid-cols-1 place-items-center">
+        <div className="w-full max-w-screen-2xl px-4 py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-6">
+            {podcastList.map((podcast: PodcastProps) => (
+              <div key={podcast.id} className="grid grid-cols-1 place-items-center rounded-lg shadow-lg overflow-hidden">
+                <div className="leading-7 w-full aspect-1">
+                  <Image src={podcast.image} alt={podcast.title} width={300} height={300} />
+                </div>
+                <div className="text-xs">{podcast.title}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </Container>
   )
 }
