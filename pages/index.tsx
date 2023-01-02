@@ -15,11 +15,11 @@ export default function IndexApp(props: WebSectionProps) {
 
   const maintexts = pageContent.maintexts
 
-  const [podcastList, setPodcastList] = useState<PodcastProps[]>([])
+  const [podcastList, setPodcastList] = useState<PodcastProps[]>([] as PodcastProps[])
 
   useEffect(() => {
     getPodcastsList().then(data => {
-      setPodcastList(data)
+      setPodcastList(data || [])
     })
   }, [])
 
