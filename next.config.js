@@ -16,7 +16,15 @@ module.exports = withPWA({
     runtimeCaching,
   },
   images: {
-    domains: ["localhost", "itunes.apple.com"],
+    domains: [
+      "localhost",
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.mzstatic.com',
+      },
+    ],
     formats: ["image/avif", "image/webp"]
   },
 })
