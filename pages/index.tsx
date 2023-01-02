@@ -4,11 +4,7 @@ import Head from "next/head"
 import { LocaleProps, WebSectionProps } from "../types/navigation"
 import { PodcastProps } from "../types/podcast"
 
-import { getFromLocalStorage } from '../utils/localStorage/getFromLocalStorage'
-import { saveToLocalStorage } from '../utils/localStorage/saveToLocalStorage'
-
-import { getData } from "../services/getData"
-import { mapPodcasts } from "../mappers/mapPodcasts"
+import { getPodcastsList } from "../utils/getPodcastsList"
 
 import Container from "../components/Container"
 
@@ -22,20 +18,9 @@ export default function IndexApp(props: WebSectionProps) {
   const [podcastList, setPodcastList] = useState<PodcastProps[]>([])
 
   useEffect(() => {
-    const podcastLocalList = getFromLocalStorage('podcastList')
-    if (podcastLocalList) {
-      setPodcastList(podcastLocalList)
-      saveToLocalStorage('podcastList', podcastLocalList)
-    } else {
-      getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" }).then(data => {
-        if (data?.feed?.entry) {
-          const mappedPodcastList = mapPodcasts(data.feed.entry)
-          console.log(mappedPodcastList)
-          setPodcastList(mappedPodcastList)
-          saveToLocalStorage('podcastList', mappedPodcastList)
-        }
-      })
-    }
+    getPodcastsList().then(data => {
+      setPodcastList(data)
+    })
   }, [])
 
   return (
@@ -54,7 +39,7 @@ export default function IndexApp(props: WebSectionProps) {
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-2xl px-4 py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-6">
-            {podcastList.map((podcast: PodcastProps) => (
+            {podcastList?.length > 0 && podcastList.map((podcast: PodcastProps) => (
               <PodcastCard key={podcast.id} podcast={podcast} />
             ))}
           </div>
