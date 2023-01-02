@@ -7,37 +7,31 @@ import Container from "../components/Container"
 import { getData } from "../services/getData"
 import { getFromLocalStorage } from '../utils/localStorage/getFromLocalStorage'
 import { saveToLocalStorage } from '../utils/localStorage/saveToLocalStorage'
+import { mapPodcasts } from "../mappers/mapPodcasts"
+import { PodcastProps } from "../types/podcast"
 
 export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
 
-
-
   const maintexts = pageContent.maintexts
 
-  const [podcastList, setPodcastList] = useState([])
-  //const podcastList = pageContent.data.podcastList
-  //console.log("podcasts", podcastList)
-
-  //const podcastList = getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" }).then(data => console.log("data", data))
+  const [podcastList, setPodcastList] = useState<PodcastProps[]>([])
 
   useEffect(() => {
     const podcastLocalList = getFromLocalStorage('podcastList')
     if (podcastLocalList) {
-      //console.log("podcastLocalList", podcastLocalList)
       setPodcastList(podcastLocalList)
       saveToLocalStorage('podcastList', podcastLocalList)
     } else {
       getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" }).then(data => {
-        console.log("data", data)
         if (data?.feed?.entry) {
-          setPodcastList(data.feed.entry)
-          saveToLocalStorage('podcastList', data.feed.entry)
+          const mappedPodcastList = mapPodcasts(data.feed.entry)
+          console.log(mappedPodcastList)
+          setPodcastList(mappedPodcastList)
+          saveToLocalStorage('podcastList', mappedPodcastList)
         }
       })
     }
-
-
   }, [])
 
   return (
@@ -61,16 +55,12 @@ export default function IndexApp(props: WebSectionProps) {
 export async function getStaticProps({ locale }: LocaleProps) {
   const maintexts = await import(`../language/${locale}.json`)
 
-  //const podcastList = await getPodcastList()
-
   return {
     props: {
       section: "home",
       pageContent: {
         maintexts: maintexts.default,
-        data: {
-          //podcastList,
-        }
+        data: {}
       },
       locale,
     },
