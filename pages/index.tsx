@@ -1,15 +1,44 @@
+import { useEffect, useState } from "react"
 import Head from "next/head"
 
 import { LocaleProps, WebSectionProps } from "../types/navigation"
 
 import Container from "../components/Container"
+import { getData } from "../services/getData"
+import { getFromLocalStorage } from '../utils/localStorage/getFromLocalStorage'
+import { saveToLocalStorage } from '../utils/localStorage/saveToLocalStorage'
 
 export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
 
+
+
   const maintexts = pageContent.maintexts
-  const podcasts = pageContent.data.podcasts
-  console.log("podcasts", podcasts)
+
+  const [podcastList, setPodcastList] = useState([])
+  //const podcastList = pageContent.data.podcastList
+  //console.log("podcasts", podcastList)
+
+  //const podcastList = getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" }).then(data => console.log("data", data))
+
+  useEffect(() => {
+    const podcastLocalList = getFromLocalStorage('podcastList')
+    if (podcastLocalList) {
+      //console.log("podcastLocalList", podcastLocalList)
+      setPodcastList(podcastLocalList)
+      saveToLocalStorage('podcastList', podcastLocalList)
+    } else {
+      getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" }).then(data => {
+        console.log("data", data)
+        if (data?.feed?.entry) {
+          setPodcastList(data.feed.entry)
+          saveToLocalStorage('podcastList', data.feed.entry)
+        }
+      })
+    }
+
+
+  }, [])
 
   return (
     <Container>
@@ -32,12 +61,16 @@ export default function IndexApp(props: WebSectionProps) {
 export async function getStaticProps({ locale }: LocaleProps) {
   const maintexts = await import(`../language/${locale}.json`)
 
+  //const podcastList = await getPodcastList()
+
   return {
     props: {
       section: "home",
       pageContent: {
         maintexts: maintexts.default,
-        data: {}
+        data: {
+          //podcastList,
+        }
       },
       locale,
     },
