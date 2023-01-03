@@ -4,6 +4,5 @@ export interface PodcastProps {
   author: string,
   summary: string,
   image: string,
-  link: string,
   category: string,
 }

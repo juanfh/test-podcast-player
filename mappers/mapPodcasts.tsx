@@ -7,7 +7,6 @@ export const mapPodcast = (podcast: any): PodcastProps => {
     author: podcast['im:artist']?.label || '',
     summary: podcast?.summary?.label || '',
     image: podcast['im:image'][2]?.label || '',
-    link: podcast?.link?.attributes?.href || '',
     category: podcast?.category?.attributes?.label || '',
   }
 }
@@ -17,4 +16,15 @@ export const mapPodcasts = (podcasts: any): PodcastProps[] => {
     return mapPodcast(podcast)
   }) : []
   return data
+}
+
+export const mapPodcastDetail = (podcast: any): PodcastProps => {
+  return {
+    id: podcast?.id?.attributes['im:id'] || '',
+    title: podcast['im:name']?.label || '',
+    author: podcast['im:artist']?.label || '',
+    summary: podcast?.summary?.label || '',
+    image: podcast['im:image'][2]?.label || '',
+    category: podcast?.category?.attributes?.label || '',
+  }
 }
