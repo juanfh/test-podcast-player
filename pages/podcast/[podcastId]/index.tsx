@@ -59,7 +59,7 @@ export default function PodcastDetail(props: WebSectionProps) {
   )
 }
 
-export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
+export const getStaticPaths: GetStaticPaths<{ podcastId: string }> = async () => {
   return {
     paths: [], //indicates that no page needs be created at build time
     fallback: "blocking", //indicates the type of fallback
@@ -68,7 +68,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
 
 export async function getStaticProps({ params, locale }: LocaleProps) {
   const maintexts = await import(`../../../language/${locale}.json`)
-  const podcastId = params?.id || ""
+  const podcastId = params?.podcastId || ""
 
   return {
     props: {
