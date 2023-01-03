@@ -12,14 +12,20 @@ export const getPodcastsList = async () => {
     saveToLocalStorage('podcastList', podcastLocalList)
     return podcastLocalList
   } else {
-    const newPodcastList = await getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" })
-    if (newPodcastList?.feed?.entry) {
-      const mappedPodcastList = mapPodcasts(newPodcastList.feed.entry)
-      saveToLocalStorage('podcastList', mappedPodcastList)
-      return mappedPodcastList
-    } else {
+    try {
+      const newPodcastList = await getData({ url: "us/rss/toppodcasts/limit=100/genre=1310/json" })
+      if (newPodcastList?.feed?.entry) {
+        const mappedPodcastList = mapPodcasts(newPodcastList.feed.entry)
+        saveToLocalStorage('podcastList', mappedPodcastList)
+        return mappedPodcastList
+      } else {
+        return []
+      }
+    } catch (error) {
+      //console.log(error)
       return []
     }
+
   }
 
 }
