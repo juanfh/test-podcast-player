@@ -15,7 +15,6 @@ export const getPodcastsDetail = async (podcastId: string) => {
   } else {
     const newPodcastDetail = await getData({ url: `lookup?id=${podcastId}` })
     if (newPodcastDetail?.results[0]) {
-
       const parser = new Parser()
       if (newPodcastDetail.results[0]?.feedUrl) {
         try {
@@ -30,7 +29,6 @@ export const getPodcastsDetail = async (podcastId: string) => {
           return undefined
         }
       }
-
       return undefined
 
     } else {
