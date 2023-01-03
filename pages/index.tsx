@@ -9,6 +9,7 @@ import { getPodcastsList } from "../utils/getPodcastsList"
 import Container from "../components/Container"
 
 import { PodcastCard } from "../components/podcast/PodcastCard"
+import { SectionHeader } from "../components/SectionHeader"
 
 export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -35,6 +36,7 @@ export default function IndexApp(props: WebSectionProps) {
         <meta name="twitter:description" content={maintexts.mainSeoDescription} />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_HOST} />
       </Head>
+      <SectionHeader title={maintexts.mainSeoTitle} subtitle={maintexts.mainSeoTitle} />
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-2xl px-4 py-16">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">

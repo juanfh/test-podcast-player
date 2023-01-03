@@ -25,7 +25,7 @@ const Container = ({ children = null }: ContainerProps) => {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content={process.env.NEXT_PUBLIC_AUTHOR} />
       </Head>
-      <div>
+      <div className="flex flex-col min-h-screen">
         <Header />
         <main className={`w-full mb-auto`}>
           {children}
