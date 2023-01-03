@@ -15,15 +15,24 @@ export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: Podcas
 
   return (
     <div className="w-full sm:col-span-2">
-      <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4">
         <div className="uppercase text-xl font-bold text-fuchsia-800">{maintexts.episodes}: {podcastDetail.episodes.length}</div>
       </div>
       <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4">
         <div className="grid grid-cols-1">
           <div className="hidden md:grid md:grid-cols-6 items-center px-2 py-1 font-bold text-fuchsia-800">
-            <div className="col-span-4">{maintexts.title}</div>
-            <div className="text-right">{maintexts.date}</div>
-            <div className="text-right">{maintexts.duration}</div>
+            <div className="col-span-4 flex items-center gap-1">
+              <div className="text-sm"><Icon icon="podcast" /></div>
+              <div>{maintexts.title}</div>
+            </div>
+            <div className="flex justify-end items-center gap-1">
+              <div className="text-xs"><Icon icon="calendar-days" /></div>
+              <div>{maintexts.date}</div>
+            </div>
+            <div className="flex justify-end items-center gap-1">
+              <div className="text-xs"><Icon icon="clock" /></div>
+              <div>{maintexts.duration}</div>
+            </div>
           </div>
           {podcastDetail.episodes.map((episode, index) => (
             <div key={episode.id} className={`grid grid-cols-1 md:grid-cols-6 items-center ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} px-2 py-1`}>
