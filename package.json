@@ -29,6 +29,7 @@
     "next-pwa": "5.5.5",
     "nextjs-progressbar": "0.0.14",
     "rss-parser": "3.12.0",
-    "moment": "2.29.4"
+    "moment": "2.29.4",
+    "react-player": "2.11.0"
   }
 }
