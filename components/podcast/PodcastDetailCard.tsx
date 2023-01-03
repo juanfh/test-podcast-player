@@ -26,11 +26,11 @@ export const PodcastDetailCard = ({ podcastDetail, section }: PodcastDetailCardP
       <div className="pt-4 text-center">
         <Link href={`/podcast/${podcastDetail.id}`}>
           {section === "podcastdetail" ? (
-            <h1 className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900">{podcastDetail.title}</h1>
+            <h1 className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900 transition-colors duration-300">{podcastDetail.title}</h1>
           ) : (
-            <div className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900">{podcastDetail.title}</div>
+            <div className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900 transition-colors duration-300">{podcastDetail.title}</div>
           )}
-          <div className="text-xs text-fuchsia-600 group-hover:text-fuchsia-700">by {podcastDetail.author}</div>
+          <div className="text-xs text-fuchsia-600 group-hover:text-fuchsia-700 transition-colors duration-300">by {podcastDetail.author}</div>
         </Link>
         <div className="pt-4 text-left text-sm overflow-hidden">
           <Interweave content={description} className="wysiwygeditor" />
