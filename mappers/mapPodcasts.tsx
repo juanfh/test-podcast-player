@@ -18,13 +18,13 @@ export const mapPodcasts = (podcasts: any): PodcastProps[] => {
   return data
 }
 
-export const mapPodcastDetail = (podcast: any): PodcastProps => {
+/* export const mapPodcastDetail = (podcast: any): PodcastProps => {
   return {
-    id: podcast?.id?.attributes['im:id'] || '',
-    title: podcast['im:name']?.label || '',
-    author: podcast['im:artist']?.label || '',
+    id: podcast?.trackId || '',
+    title: podcast?.trackName || '',
+    author: podcast?.artistName || '',
     summary: podcast?.summary?.label || '',
     image: podcast['im:image'][2]?.label || '',
     category: podcast?.category?.attributes?.label || '',
   }
-}
+} */

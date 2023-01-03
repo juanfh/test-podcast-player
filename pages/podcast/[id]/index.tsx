@@ -5,12 +5,20 @@ import { GetStaticPaths } from "next"
 import { LocaleProps, WebSectionProps } from "../../../types/navigation"
 
 import Container from "../../../components/Container"
+import { getPodcastsDetail } from "../../../utils/getPodcastsDetail"
 
-export default function PodCastDetail(props: WebSectionProps) {
+export default function PodcastDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
 
   const maintexts = pageContent.maintexts
   const podcastId = pageContent.data.podcastId
+  const [podcastDetail, setPodcastDetail] = useState(undefined)
+
+  useEffect(() => {
+    getPodcastsDetail(podcastId).then(data => {
+      //setPodcastDetail(data || undefined)
+    })
+  }, [podcastId])
 
   return (
     <Container>
