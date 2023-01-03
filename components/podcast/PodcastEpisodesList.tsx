@@ -38,10 +38,10 @@ export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: Podcas
             <div key={episode.id} className={`grid grid-cols-1 md:grid-cols-6 items-center ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} px-2 py-1`}>
               <Link href={`/podcast/${podcastDetail.id}/episode/${episode.id}`} className="md:col-span-4">
                 <div className="group text-sm text-fuchsia-600 flex items-center gap-2">
-                  <div className="bg-fuchsia-800 group-hover:bg-fuchsia-900 transition-colors duration-300 text-white p-1 rounded-full w-8 h-8 grid grid-cols-1 place-items-center">
+                  <div className="flex flex-col justify-center items-center bg-fuchsia-800 group-hover:bg-fuchsia-900 transition-colors duration-300 text-white p-1 rounded-full w-8 h-8">
                     <Icon icon="volume-high" />
                   </div>
-                  <div className="group-hover:text-fuchsia-800 transition-colors duration-300">
+                  <div className="w-full grow group-hover:text-fuchsia-800 transition-colors duration-300">
                     {episode.title}
                   </div>
                 </div>
