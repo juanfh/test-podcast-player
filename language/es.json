@@ -4,5 +4,7 @@
   "episodes": "Episodios",
   "title": "Título",
   "date": "Fecha",
-  "duration": "Duración"
+  "duration": "Duración",
+  "filter": "Filtrar",
+  "enterSearch": "Introduce tu búsqueda"
 }

@@ -10,18 +10,44 @@ import Container from "../components/Container"
 
 import { PodcastCard } from "../components/podcast/PodcastCard"
 import { SectionHeader } from "../components/SectionHeader"
+import { Icon } from "../components/common/Icon"
+import { SearchInput } from "../components/common/SearchInput"
 
 export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
 
   const maintexts = pageContent.maintexts
+  const [searchValue, setSearchValue] = useState<string>("")
   const [podcastList, setPodcastList] = useState<PodcastProps[]>([] as PodcastProps[])
+  const [filteredPodcastList, setFilteredPodcastList] = useState<PodcastProps[]>([] as PodcastProps[])
+
+  const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const search = event.target.value
+    setSearchValue(search)
+  }
+
+  const filterPodcastList = () => {
+    return podcastList.filter((podcast: PodcastProps) => {
+      return podcast.title.toLowerCase().includes(searchValue.toLowerCase()) || podcast.author.toLowerCase().includes(searchValue.toLowerCase())
+    })
+  }
 
   useEffect(() => {
     getPodcastsList().then(data => {
       setPodcastList(data || [])
+      setFilteredPodcastList(data || [])
     })
   }, [])
+
+  useEffect(() => {
+    if (searchValue.length > 0) {
+      const filteredPodcastList = filterPodcastList()
+      setFilteredPodcastList(filteredPodcastList)
+    } else {
+      setFilteredPodcastList(podcastList)
+    }
+    /* eslint-disable-next-line */
+  }, [searchValue])
 
   return (
     <Container>
@@ -38,9 +64,10 @@ export default function IndexApp(props: WebSectionProps) {
       </Head>
       <SectionHeader title={maintexts.mainSeoTitle} subtitle={maintexts.mainSeoTitle} />
       <div className="grid grid-cols-1 place-items-center">
-        <div className="w-full max-w-screen-2xl px-4 py-16">
+        <div className="w-full max-w-screen-2xl px-4 py-8">
+          <SearchInput value={searchValue} maintexts={maintexts} onChange={handleChangeSearch} />
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">
-            {podcastList?.length > 0 && podcastList.map((podcast: PodcastProps) => (
+            {filteredPodcastList?.length > 0 && filteredPodcastList.map((podcast: PodcastProps) => (
               <PodcastCard key={podcast.id} podcast={podcast} />
             ))}
           </div>
