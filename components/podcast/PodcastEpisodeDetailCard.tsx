@@ -18,7 +18,7 @@ export const PodcastEpisodeDetailCard = ({ episodeDetail }: PodcastEpisodeDetail
   return (
     <div className="w-full sm:col-span-2">
       <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4">
-        <div className="text-xl font-bold text-fuchsia-800">{episodeDetail.title}</div>
+        <h1 className="text-xl font-bold text-fuchsia-800">{episodeDetail.title}</h1>
         <div className="pt-4 text-left text-sm pb-8">
           <Interweave content={description} className="wysiwygeditor" />
         </div>

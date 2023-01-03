@@ -6,9 +6,10 @@ import { PodcastWithEpisodesProps } from "../../types/podcast"
 
 export interface PodcastDetailCardProps {
   podcastDetail: PodcastWithEpisodesProps
+  section: string
 }
 
-export const PodcastDetailCard = ({ podcastDetail }: PodcastDetailCardProps) => {
+export const PodcastDetailCard = ({ podcastDetail, section }: PodcastDetailCardProps) => {
 
   const [description, setDescription] = useState<string>("")
   useEffect(() => {
@@ -24,7 +25,11 @@ export const PodcastDetailCard = ({ podcastDetail }: PodcastDetailCardProps) => 
       </Link>
       <div className="pt-4 text-center">
         <Link href={`/podcast/${podcastDetail.id}`}>
-          <div className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900">{podcastDetail.title}</div>
+          {section === "podcastdetail" ? (
+            <h1 className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900">{podcastDetail.title}</h1>
+          ) : (
+            <div className="text-xl font-bold text-fuchsia-800 group-hover:text-fuchsia-900">{podcastDetail.title}</div>
+          )}
           <div className="text-xs text-fuchsia-600 group-hover:text-fuchsia-700">by {podcastDetail.author}</div>
         </Link>
         <div className="pt-4 text-left text-sm overflow-hidden">
