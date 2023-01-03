@@ -4,7 +4,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   @apply text-zinc-500;
   @apply bg-zinc-200;
 }
