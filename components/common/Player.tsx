@@ -1,6 +1,3 @@
-import AudioPlayer from 'react-h5-audio-player'
-import 'react-h5-audio-player/lib/styles.css'
-
 export interface PlayerProps {
   url: string
 }
@@ -8,6 +5,8 @@ export interface PlayerProps {
 export const Player = ({ url }: PlayerProps) => {
 
   return (
-    <AudioPlayer autoPlay src={url} onPlay={e => console.log("onPlay")} />
+    <audio controls className="w-full">
+      <source src={url} type="audio/mpeg" />
+    </audio>
   )
 }
