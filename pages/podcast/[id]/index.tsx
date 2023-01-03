@@ -16,7 +16,7 @@ export default function PodcastDetail(props: WebSectionProps) {
 
   useEffect(() => {
     getPodcastsDetail(podcastId).then(data => {
-      //setPodcastDetail(data || undefined)
+      setPodcastDetail(data || undefined)
     })
   }, [podcastId])
 
