@@ -1,22 +1,37 @@
 import { PodcastWithEpisodesProps } from "../../types/podcast"
+import { formatDate } from "../../utils/formatDate"
+import { formatSecondsToHours } from "../../utils/formatSecondsToHours"
+
 
 export interface PodcastEpisodesListProps {
   podcastDetail: PodcastWithEpisodesProps
+  locale: string
 }
 
-export const PodcastEpisodesList = ({ podcastDetail }: PodcastEpisodesListProps) => {
+export const PodcastEpisodesList = ({ podcastDetail, locale }: PodcastEpisodesListProps) => {
 
   return (
-    <div className="sm:col-span-2 place-self-start bg-white rounded-lg shadow-lg overflow-hidden p-4">
-      <div>EPISODES: {podcastDetail.episodes.length}</div>
-      <div className="grid grid-cols-1 gap-2">
-        {podcastDetail.episodes.map((episode, index) => (
-          <div key={episode.id} className={`grid grid-cols-6 ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"}`}>
-            <div className="col-span-4">{episode.title}</div>
-            <div>{episode.date}</div>
-            <div>{episode.duration}</div>
+    <div className="w-full sm:col-span-2">
+      <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4">
+        <div className="text-xl font-bold text-fuchsia-800">EPISODES: {podcastDetail.episodes.length}</div>
+      </div>
+      <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4">
+        <div className="grid grid-cols-1">
+          <div className="hidden md:grid md:grid-cols-6 items-center px-2 py-1 font-bold text-fuchsia-800">
+            <div className="col-span-4">Title</div>
+            <div className="text-right">Date</div>
+            <div className="text-right">Duration</div>
           </div>
-        ))}
+          {podcastDetail.episodes.map((episode, index) => (
+            <div key={episode.id} className={`grid grid-cols-1 md:grid-cols-6 items-center ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} px-2 py-1`}>
+              <div className="md:col-span-4 text-sm text-fuchsia-600">{episode.title}</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 md:col-span-2">
+                <div className="text-sm md:text-right">{formatDate(episode.date, locale)}</div>
+                <div className="text-sm md:text-right">{formatSecondsToHours(episode.duration)}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
