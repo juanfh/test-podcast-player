@@ -38,7 +38,7 @@ export default function IndexApp(props: WebSectionProps) {
       </Head>
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-2xl px-4 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">
             {podcastList?.length > 0 && podcastList.map((podcast: PodcastProps) => (
               <PodcastCard key={podcast.id} podcast={podcast} />
             ))}
