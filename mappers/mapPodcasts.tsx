@@ -27,15 +27,15 @@ export const mapPodcastDetail = (podcastId: string, podcast: any): PodcastWithEp
     image: podcast?.image?.link || '',
     episodes: podcast?.items?.map((episode: any) => (
       {
-        id: episode.guid,
-        season: episode.itunes.season,
-        episode: episode.itunes.episode,
-        title: episode.title,
-        image: episode.itunes.image,
-        date: episode.pubDate,
-        duration: episode.itunes.duration,
-        content: episode.content,
-        url: episode.enclosure.url
+        id: episode?.guid || '',
+        season: episode?.itunes?.season || '',
+        episode: episode?.itunes?.episode || '',
+        title: episode?.title || '',
+        image: episode?.itunes?.image || '',
+        date: episode?.pubDate || '',
+        duration: episode?.itunes?.duration || '',
+        content: episode?.content || '',
+        url: episode?.enclosure?.url || '',
       }
     ))
   }
