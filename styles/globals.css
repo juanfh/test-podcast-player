@@ -12,3 +12,11 @@ body {
 .aspect-1 {
   aspect-ratio: 1;
 }
+
+.rhap_progress-indicator {
+  @apply bg-fuchsia-800 !important;
+}
+
+.rhap_main-controls-button {
+  @apply text-fuchsia-800 !important;
+}
