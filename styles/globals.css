@@ -5,7 +5,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  @apply text-zinc-500;
+  @apply text-zinc-700;
   @apply bg-zinc-200;
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 .wysiwygeditor strong {
-  @apply text-zinc-700;
+  @apply text-fuchsia-600;
   @apply font-bold;
 }
 
@@ -47,6 +47,6 @@ body {
 }
 
 .wysiwygeditor a {
-  @apply text-zinc-900;
+  @apply text-fuchsia-600;
   @apply font-bold;
 }
