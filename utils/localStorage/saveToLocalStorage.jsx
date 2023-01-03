@@ -6,7 +6,7 @@ export const saveToLocalStorage = (name, value) => {
   const newParams = {
     ...prevParams,
     [name]: value,
-    expiry: now.getTime() + 5000 //86400000 // 1 day
+    expiry: now.getTime() + 86400000
   }
   localStorage.setItem('WebLocalParams', JSON.stringify(newParams))
 }
