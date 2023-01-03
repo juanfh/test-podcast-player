@@ -1,5 +1,9 @@
 export const formatSecondsToHours = (secondsString: string) => {
 
+  if (secondsString.indexOf(":") > -1) {
+    return secondsString
+  }
+
   const secNum = parseInt(secondsString, 10)
   const hours = Math.floor(secNum / 3600)
   const minutes = Math.floor((secNum - (hours * 3600)) / 60)
