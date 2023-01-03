@@ -10,7 +10,7 @@ const Container = ({ children = null }: ContainerProps) => {
 
   return (
     <div itemScope itemType="http://schema.org/OnlineStore">
-      <NextNprogress color="#000000" startPosition={0.3} stopDelayMs={200} height={2} showOnShallow={true} options={{ showSpinner: false }} />
+      <NextNprogress color="#f0abfc" startPosition={0.3} stopDelayMs={200} height={2} showOnShallow={true} options={{ showSpinner: false }} />
       <Head>
         <title></title>
         <meta name="description" content="" />
