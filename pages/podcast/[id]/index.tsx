@@ -25,7 +25,6 @@ export default function PodcastDetail(props: WebSectionProps) {
 
   useEffect(() => {
     getPodcastsDetail(podcastId).then(data => {
-      console.log(data)
       setPodcastDetail(data || undefined)
       setSeoTitle(`${data?.author} - ${data?.title}`)
       data?.summary && setSeoDescription(getShortenedString(deleteHtmlTags(data.summary), 150))
