@@ -39,16 +39,16 @@ export default function PodcastDetail(props: WebSectionProps) {
         <meta property="og:type" content="website" />
         <meta name="og:title" property="og:title" content={seoTitle} />
         <meta name="og:description" property="og:description" content={seoDescription} />
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_HOST} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOST}/podcast/${podcastId}`} />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_HOST} />
+        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOST}/podcast/${podcastId}`} />
       </Head>
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-xl px-4 py-16">
           {podcastDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-              <PodcastDetailCard podcastDetail={podcastDetail} />
+              <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
               <PodcastEpisodesList podcastDetail={podcastDetail} locale={locale} maintexts={maintexts} />
             </div>
           )}
