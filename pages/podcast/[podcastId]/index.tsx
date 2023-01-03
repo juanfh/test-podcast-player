@@ -54,7 +54,6 @@ export default function PodcastDetail(props: WebSectionProps) {
           )}
         </div>
       </div>
-
     </Container>
   )
 }

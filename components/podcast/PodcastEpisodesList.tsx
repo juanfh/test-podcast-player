@@ -15,7 +15,6 @@ export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: Podcas
 
   return (
     <div className="w-full sm:col-span-2">
-
       <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4">
         <div className="uppercase text-xl font-bold text-fuchsia-800">{maintexts.episodes}: {podcastDetail.episodes.length}</div>
       </div>
