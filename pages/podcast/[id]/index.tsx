@@ -7,10 +7,10 @@ import { PodcastWithEpisodesProps } from "../../../types/podcast"
 
 import { deleteHtmlTags } from "../../../utils/deleteHtmlTags"
 import { getShortenedString } from "../../../utils/getShortenedString"
+import { getPodcastsDetail } from "../../../utils/getPodcastsDetail"
 
 import Container from "../../../components/Container"
-import { getPodcastsDetail } from "../../../utils/getPodcastsDetail"
-import Image from "next/image"
+import { PodcastDetailCard } from "../../../components/podcast/PodcastDetailCard"
 
 export default function PodcastDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -48,15 +48,7 @@ export default function PodcastDetail(props: WebSectionProps) {
         <div className="w-full max-w-screen-xl px-4 py-16">
           {podcastDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-              <div className="place-self-start bg-white rounded-lg shadow-lg overflow-hidden p-4">
-                <div className="leading-0 w-full grid grid-cols-1 place-content-center aspect-1 relative rounded-full overflow-hidden">
-                  <Image src={podcastDetail.image} alt={podcastDetail.title} fill className="object-cover" />
-                </div>
-                <div>{podcastDetail.title}</div>
-                <div>{podcastDetail.author}</div>
-                <div>Description</div>
-                <div>{podcastDetail.summary}</div>
-              </div>
+              <PodcastDetailCard podcastDetail={podcastDetail} />
               <div className="sm:col-span-2 place-self-start bg-white rounded-lg shadow-lg overflow-hidden p-4">
                 <div>EPISODES: {podcastDetail.episodes.length}</div>
                 <div className="grid grid-cols-1 gap-2">
