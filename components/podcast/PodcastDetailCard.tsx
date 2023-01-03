@@ -8,14 +8,15 @@ export interface PodcastDetailCardProps {
 export const PodcastDetailCard = ({ podcastDetail }: PodcastDetailCardProps) => {
 
   return (
-    <div className="place-self-start bg-white rounded-lg shadow-lg overflow-hidden p-4">
+    <div className="sm:sticky sm:top-4 place-self-start bg-white rounded-lg shadow-lg overflow-hidden p-4">
       <div className="leading-0 w-full grid grid-cols-1 place-content-center aspect-1 relative rounded-full overflow-hidden">
         <Image src={podcastDetail.image} alt={podcastDetail.title} fill className="object-cover" />
       </div>
-      <div>{podcastDetail.title}</div>
-      <div>{podcastDetail.author}</div>
-      <div>Description</div>
-      <div>{podcastDetail.summary}</div>
+      <div className="pt-4 text-center">
+        <div className="text-xl font-bold">{podcastDetail.title}</div>
+        <div className="text-xs">by {podcastDetail.author}</div>
+        <div className="pt-4 text-left text-sm">{podcastDetail.summary}</div>
+      </div>
     </div>
   )
 
