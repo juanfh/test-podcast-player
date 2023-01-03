@@ -11,7 +11,6 @@ export interface PodcastCardProps {
 export const PodcastCard = ({ podcast }: PodcastCardProps) => {
 
   return (
-
     <div className="rounded-lg shadow-lg overflow-hidden p-4">
       <Link href={`/podcast/${podcast.id}`}>
         <div className="leading-0 w-full grid grid-cols-1 place-content-center aspect-1 relative rounded-full overflow-hidden">
@@ -23,7 +22,6 @@ export const PodcastCard = ({ podcast }: PodcastCardProps) => {
         </div>
       </Link>
     </div>
-
   )
 
 }

@@ -4,7 +4,7 @@ export interface ContainerProps {
 
 export interface LocaleProps {
   params: {
-    slug: string
+    id: string
   }
   locale: string
 }
