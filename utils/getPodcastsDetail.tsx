@@ -2,7 +2,6 @@ import { getFromLocalStorage } from './localStorage/getFromLocalStorage'
 import { saveToLocalStorage } from './localStorage/saveToLocalStorage'
 
 import { getData } from '../services/getData'
-import Parser from 'rss-parser'
 import { mapPodcastDetail } from '../mappers/mapPodcasts'
 
 export const getPodcastsDetail = async (podcastId: string) => {
@@ -14,23 +13,26 @@ export const getPodcastsDetail = async (podcastId: string) => {
     return podcastLocalDetail
   } else {
     const newPodcastDetail = await getData({ url: `lookup?id=${podcastId}` })
-    if (newPodcastDetail?.results[0]) {
-      const parser = new Parser()
-      if (newPodcastDetail.results[0]?.feedUrl) {
-        try {
-          const feed = await parser.parseURL(newPodcastDetail.results[0].feedUrl)
-          if (feed) {
-            const mappedPodcastDetail = mapPodcastDetail(podcastId, feed)
-            saveToLocalStorage(`podcastDetail-${podcastId}}`, mappedPodcastDetail)
-            return mappedPodcastDetail
-          }
-        } catch (error) {
-          //console.log(error)
-          return undefined
-        }
-      }
-      return undefined
 
+    if (newPodcastDetail?.results[0]?.feedUrl) {
+      try {
+        const feed = await fetch(`/api/getParse`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ url: newPodcastDetail.results[0].feedUrl })
+        }).then(res => res.json()).then(data => data.data ? data.data : data)
+
+        if (feed) {
+          const mappedPodcastDetail = mapPodcastDetail(podcastId, feed)
+          saveToLocalStorage(`podcastDetail-${podcastId}}`, mappedPodcastDetail)
+          return mappedPodcastDetail
+        }
+      } catch (error) {
+        //console.log(error)
+        return undefined
+      }
     } else {
       return undefined
     }

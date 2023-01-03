@@ -1,6 +1,8 @@
+import Link from "next/link"
 import { PodcastWithEpisodesProps } from "../../types/podcast"
 import { formatDate } from "../../utils/formatDate"
 import { formatSecondsToHours } from "../../utils/formatSecondsToHours"
+import { Icon } from "../common/Icon"
 
 
 export interface PodcastEpisodesListProps {
@@ -25,7 +27,16 @@ export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: Podcas
           </div>
           {podcastDetail.episodes.map((episode, index) => (
             <div key={episode.id} className={`grid grid-cols-1 md:grid-cols-6 items-center ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} px-2 py-1`}>
-              <div className="md:col-span-4 text-sm text-fuchsia-600">{episode.title}</div>
+              <Link href={`/podcast/${podcastDetail.id}/episode/${episode.id}`} className="md:col-span-4">
+                <div className="group text-sm text-fuchsia-600 flex items-center gap-2">
+                  <div className="bg-fuchsia-800 group-hover:bg-fuchsia-900 text-white p-1 rounded-full w-8 h-8 grid grid-cols-1 place-items-center">
+                    <Icon icon="volume-high" />
+                  </div>
+                  <div className="group-hover:text-fuchsia-800">
+                    {episode.title}
+                  </div>
+                </div>
+              </Link>
               <div className="grid grid-cols-1 md:grid-cols-2 md:col-span-2">
                 <div className="text-sm md:text-right">{episode.date ? formatDate(episode.date, locale) : "-"}</div>
                 <div className="text-sm md:text-right">{episode.duration ? formatSecondsToHours(episode.duration) : "-"}</div>

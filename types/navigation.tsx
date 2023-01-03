@@ -4,7 +4,8 @@ export interface ContainerProps {
 
 export interface LocaleProps {
   params: {
-    id: string
+    podcastId: string
+    episodeId: string
   }
   locale: string
 }
