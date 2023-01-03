@@ -1,6 +1,6 @@
 import { getAllFromLocalStorage } from "./getAllFromLocalStorage"
 
-export const getFromLocalStorage = (name) => {
+export const getFromLocalStorage = (name: string) => {
   const now = new Date()
   const params = getAllFromLocalStorage()
   if (params && params[name]) {

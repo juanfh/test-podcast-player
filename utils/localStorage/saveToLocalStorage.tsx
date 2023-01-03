@@ -1,6 +1,6 @@
 import { getAllFromLocalStorage } from "./getAllFromLocalStorage"
 
-export const saveToLocalStorage = (name, value) => {
+export const saveToLocalStorage = (name: string, value: any) => {
   const now = new Date()
   const prevParams = getAllFromLocalStorage()
   const newParams = {
