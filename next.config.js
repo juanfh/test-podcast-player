@@ -22,7 +22,7 @@ module.exports = withPWA({
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.mzstatic.com',
+        hostname: '**',
       },
     ],
     formats: ["image/avif", "image/webp"]
