@@ -32,7 +32,6 @@ export default function EpisodeDetail(props: WebSectionProps) {
 
       const episode = data?.episodes?.find((episode: PodcastEpisodeProps) => episode.id === episodeId)
       setEpisodeDetail(episode || undefined)
-      console.log("episode", episode)
 
       setSeoTitle(`${data?.author} - ${data?.title} - ${episode?.title}`)
       episode?.content && setSeoDescription(getShortenedString(deleteHtmlTags(episode.content), 150))
