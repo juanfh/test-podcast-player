@@ -14,7 +14,6 @@ export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
 
   const maintexts = pageContent.maintexts
-
   const [podcastList, setPodcastList] = useState<PodcastProps[]>([] as PodcastProps[])
 
   useEffect(() => {

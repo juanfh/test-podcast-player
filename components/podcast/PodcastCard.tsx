@@ -11,7 +11,7 @@ export interface PodcastCardProps {
 export const PodcastCard = ({ podcast }: PodcastCardProps) => {
 
   return (
-    <div className="rounded-lg shadow-lg overflow-hidden p-4">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden p-4">
       <Link href={`/podcast/${podcast.id}`}>
         <div className="leading-0 w-full grid grid-cols-1 place-content-center aspect-1 relative rounded-full overflow-hidden">
           <Image src={podcast.image} alt={podcast.title} fill className="object-cover" />
