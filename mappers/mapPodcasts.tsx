@@ -24,7 +24,7 @@ export const mapPodcastDetail = (podcastId: string, podcast: any): PodcastWithEp
     title: podcast?.title || '',
     author: podcast?.itunes?.author || '',
     summary: podcast?.description || '',
-    image: podcast?.image?.link || '',
+    image: podcast?.image?.url || '',
     episodes: podcast?.items?.map((episode: any) => (
       {
         id: episode?.guid || '',
