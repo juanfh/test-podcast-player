@@ -50,7 +50,7 @@ export default function PodcastDetail(props: WebSectionProps) {
           {podcastDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
               <PodcastDetailCard podcastDetail={podcastDetail} />
-              <PodcastEpisodesList podcastDetail={podcastDetail} locale={locale} />
+              <PodcastEpisodesList podcastDetail={podcastDetail} locale={locale} maintexts={maintexts} />
             </div>
           )}
         </div>
