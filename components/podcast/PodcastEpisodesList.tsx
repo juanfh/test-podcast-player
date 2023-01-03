@@ -27,8 +27,8 @@ export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: Podcas
             <div key={episode.id} className={`grid grid-cols-1 md:grid-cols-6 items-center ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} px-2 py-1`}>
               <div className="md:col-span-4 text-sm text-fuchsia-600">{episode.title}</div>
               <div className="grid grid-cols-1 md:grid-cols-2 md:col-span-2">
-                <div className="text-sm md:text-right">{formatDate(episode.date, locale)}</div>
-                <div className="text-sm md:text-right">{formatSecondsToHours(episode.duration)}</div>
+                <div className="text-sm md:text-right">{episode.date ? formatDate(episode.date, locale) : "-"}</div>
+                <div className="text-sm md:text-right">{episode.duration ? formatSecondsToHours(episode.duration) : "-"}</div>
               </div>
             </div>
           ))}
