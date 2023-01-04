@@ -21,6 +21,7 @@ export default function EpisodeDetail(props: WebSectionProps) {
   const podcastId = pageContent.data.podcastId
   const episodeId = pageContent.data.episodeId
 
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [podcastDetail, setPodcastDetail] = useState<PodcastWithEpisodesProps | undefined>(undefined)
   const [episodeDetail, setEpisodeDetail] = useState<PodcastEpisodeProps | undefined>(undefined)
 
@@ -29,6 +30,7 @@ export default function EpisodeDetail(props: WebSectionProps) {
 
   useEffect(() => {
     getPodcastsDetail(podcastId).then(data => {
+      setIsLoading(false)
       setPodcastDetail(data || undefined)
 
       const episode = data?.episodes?.find((episode: PodcastEpisodeProps) => episode.id === episodeId)
@@ -54,12 +56,15 @@ export default function EpisodeDetail(props: WebSectionProps) {
       </Head>
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-xl px-4 py-16">
-          {(!podcastDetail || !episodeDetail) && (
+          {isLoading && (
             <div className="grid grid-cols-1 place-items-center">
               <Loader />
             </div>
           )}
-          {podcastDetail && episodeDetail && (
+          {!isLoading && (!podcastDetail || !episodeDetail) && (
+            <div>ERROR</div>
+          )}
+          {!isLoading && podcastDetail && episodeDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
               <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
               <PodcastEpisodeDetailCard episodeDetail={episodeDetail} />

@@ -8,5 +8,9 @@ export const saveToLocalStorage = (name: string, value: any) => {
     [name]: value,
     expiry: now.getTime() + 86400000
   }
-  localStorage.setItem('WebLocalParams', JSON.stringify(newParams))
+  try {
+    localStorage.setItem('WebLocalParams', JSON.stringify(newParams))
+  } catch (error) {
+    console.log(error)
+  }
 }

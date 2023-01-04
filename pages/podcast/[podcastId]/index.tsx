@@ -19,6 +19,8 @@ export default function PodcastDetail(props: WebSectionProps) {
 
   const maintexts = pageContent.maintexts
   const podcastId = pageContent.data.podcastId
+
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [podcastDetail, setPodcastDetail] = useState<PodcastWithEpisodesProps | undefined>(undefined)
 
   const [seoTitle, setSeoTitle] = useState<string>("")
@@ -26,6 +28,7 @@ export default function PodcastDetail(props: WebSectionProps) {
 
   useEffect(() => {
     getPodcastsDetail(podcastId).then(data => {
+      setIsLoading(false)
       setPodcastDetail(data || undefined)
       setSeoTitle(`${data?.author} - ${data?.title}`)
       data?.summary && setSeoDescription(getShortenedString(deleteHtmlTags(data.summary), 150))
@@ -47,12 +50,15 @@ export default function PodcastDetail(props: WebSectionProps) {
       </Head>
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-xl px-4 py-16">
-          {!podcastDetail && (
+          {isLoading && (
             <div className="grid grid-cols-1 place-items-center">
               <Loader />
             </div>
           )}
-          {podcastDetail && (
+          {!isLoading && !podcastDetail && (
+            <div>ERROR</div>
+          )}
+          {!isLoading && podcastDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
               <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
               <PodcastEpisodesList podcastDetail={podcastDetail} locale={locale} maintexts={maintexts} />
