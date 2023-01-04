@@ -12,6 +12,7 @@ import { getPodcastsDetail } from "../../../utils/getPodcastsDetail"
 import Container from "../../../components/Container"
 import { PodcastDetailCard } from "../../../components/podcast/PodcastDetailCard"
 import { PodcastEpisodesList } from "../../../components/podcast/PodcastEpisodesList"
+import { Loader } from "../../../components/common/Loader"
 
 export default function PodcastDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -46,6 +47,11 @@ export default function PodcastDetail(props: WebSectionProps) {
       </Head>
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-xl px-4 py-16">
+          {!podcastDetail && (
+            <div className="grid grid-cols-1 place-items-center">
+              <Loader />
+            </div>
+          )}
           {podcastDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
               <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
