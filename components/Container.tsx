@@ -9,7 +9,7 @@ import { Footer } from "./Footer"
 const Container = ({ children = null }: ContainerProps) => {
 
   return (
-    <div itemScope itemType="http://schema.org/OnlineStore">
+    <>
       <NextNprogress color="#f0abfc" startPosition={0.3} stopDelayMs={200} height={2} showOnShallow={true} options={{ showSpinner: false }} />
       <Head>
         <title></title>
@@ -32,7 +32,7 @@ const Container = ({ children = null }: ContainerProps) => {
         </main>
         <Footer />
       </div>
-    </div>
+    </>
   )
 }
 
