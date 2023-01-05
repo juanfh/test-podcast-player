@@ -12,6 +12,7 @@ import { PodcastCard } from "../components/podcast/PodcastCard"
 import { SectionHeader } from "../components/SectionHeader"
 import { SearchInput } from "../components/common/SearchInput"
 import { Loader } from "../components/common/Loader"
+import { PodcastError } from "../components/common/PodcastError"
 
 export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -76,11 +77,17 @@ export default function IndexApp(props: WebSectionProps) {
           {!isLoading && podcastList.length > 0 && (
             <>
               <SearchInput value={searchValue} maintexts={maintexts} onChange={handleChangeSearch} />
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">
-                {filteredPodcastList?.length > 0 && filteredPodcastList.map((podcast: PodcastProps) => (
-                  <PodcastCard key={podcast.id} podcast={podcast} />
-                ))}
-              </div>
+              {filteredPodcastList?.length > 0 ? (
+                <>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">
+                    {filteredPodcastList.map((podcast: PodcastProps) => (
+                      <PodcastCard key={podcast.id} podcast={podcast} />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <PodcastError title={maintexts.sorry} message={maintexts.noResults} />
+              )}
             </>
           )}
         </div>
