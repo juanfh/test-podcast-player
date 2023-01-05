@@ -1,4 +1,5 @@
 import { PodcastProps, PodcastWithEpisodesProps } from "../types/podcast"
+import { createSlug } from "../utils/createSlug"
 
 export const mapPodcast = (podcast: any): PodcastProps => {
   return {
@@ -27,7 +28,7 @@ export const mapPodcastDetail = (podcastId: string, podcast: any): PodcastWithEp
     image: podcast?.image?.url || '',
     episodes: podcast?.items?.map((episode: any) => (
       {
-        id: episode?.guid || '',
+        id: episode?.guid ? createSlug(episode.guid) : '',
         season: episode?.itunes?.season || '',
         episode: episode?.itunes?.episode || '',
         title: episode?.title || '',
