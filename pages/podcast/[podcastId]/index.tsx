@@ -13,6 +13,7 @@ import Container from "../../../components/Container"
 import { PodcastDetailCard } from "../../../components/podcast/PodcastDetailCard"
 import { PodcastEpisodesList } from "../../../components/podcast/PodcastEpisodesList"
 import { Loader } from "../../../components/common/Loader"
+import { PodcastError } from "../../../components/common/PodcastError"
 
 export default function PodcastDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -56,7 +57,9 @@ export default function PodcastDetail(props: WebSectionProps) {
             </div>
           )}
           {!isLoading && !podcastDetail && (
-            <div>ERROR</div>
+            <div className="grid grid-cols-1 place-items-center">
+              <PodcastError title={maintexts.sorry} message={maintexts.loadingError} label={maintexts.back} />
+            </div>
           )}
           {!isLoading && podcastDetail && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">

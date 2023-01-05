@@ -6,5 +6,13 @@
   "date": "Fecha",
   "duration": "Duración",
   "filter": "Filtrar",
-  "enterSearch": "Introduce tu búsqueda"
+  "search": "Buscar",
+  "loading": "Cargando",
+  "enterSearch": "Introduce tu búsqueda",
+  "sorry": "Lo sentimos",
+  "noResults": "No se han encontrado resultados",
+  "generalError": "Ha ocurrido un error",
+  "loadingError": "Ha ocurrido un error al cargar los datos",
+  "tryAgain": "Vuelve a intentarlo",
+  "back": "Volver"
 }
