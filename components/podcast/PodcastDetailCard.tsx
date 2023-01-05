@@ -19,7 +19,7 @@ export const PodcastDetailCard = ({ podcastDetail, section }: PodcastDetailCardP
   return (
     <div className="w-full group sm:sticky sm:top-4 place-self-start bg-white rounded-lg shadow-lg p-4">
       <Link href={`/podcast/${podcastDetail.id}`}>
-        <div className="leading-0 w-full grid grid-cols-1 place-content-center aspect-1 relative rounded-full overflow-hidden">
+        <div className="leading-0 w-full grid grid-cols-1 place-content-center aspect-1 relative rounded-lg overflow-hidden">
           <Image src={podcastDetail.image} alt={podcastDetail.title} fill className="object-cover" />
         </div>
       </Link>
