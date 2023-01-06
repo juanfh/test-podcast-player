@@ -14,7 +14,7 @@ export const getPodcastsDetail = async (podcastId: string) => {
   } else {
     const newPodcastDetail = await getData({ url: `lookup?id=${podcastId}` })
 
-    if (newPodcastDetail?.results[0]?.feedUrl) {
+    if (newPodcastDetail?.results?.length > 0 && newPodcastDetail?.results[0]?.feedUrl) {
       try {
         const feed = await fetch(`/api/getParse`, {
           method: 'POST',

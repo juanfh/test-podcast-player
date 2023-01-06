@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import { useRouter } from "next/router"
 
 import { LocaleProps, WebSectionProps } from "../types/navigation"
 import { PodcastProps } from "../types/podcast"
@@ -16,6 +17,8 @@ import { PodcastError } from "../components/common/PodcastError"
 
 export default function IndexApp(props: WebSectionProps) {
   const { section, pageContent, locale } = props
+
+  const router = useRouter()
 
   const maintexts = pageContent.maintexts
 
@@ -65,8 +68,11 @@ export default function IndexApp(props: WebSectionProps) {
         <meta name="twitter:title" content={maintexts.mainSeoTitle} />
         <meta name="twitter:description" content={maintexts.mainSeoDescription} />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_HOST} />
+        {router.asPath !== "/" && (
+          <meta name="robots" content="noindex, nofollow, noarchive" />
+        )}
       </Head>
-      <SectionHeader title={maintexts.mainSeoTitle} subtitle={maintexts.mainSeoTitle} />
+      <SectionHeader title={maintexts.mainSeoTitle} subtitle={maintexts.mainSeoDescription} />
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-2xl px-4 py-8">
           {isLoading && (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { GetStaticPaths } from "next"
 
 import { LocaleProps, WebSectionProps } from "../../../types/navigation"
@@ -18,6 +19,8 @@ import { PodcastError } from "../../../components/common/PodcastError"
 export default function PodcastDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
 
+  const router = useRouter()
+
   const maintexts = pageContent.maintexts
   const podcastId = pageContent.data.podcastId
 
@@ -31,9 +34,15 @@ export default function PodcastDetail(props: WebSectionProps) {
     getPodcastsDetail(podcastId).then(data => {
       setIsLoading(false)
       setPodcastDetail(data || undefined)
-      setSeoTitle(`${data?.author} - ${data?.title}`)
-      data?.summary && setSeoDescription(getShortenedString(deleteHtmlTags(data.summary), 150))
+      if (data) {
+        setSeoTitle(`${data?.author} - ${data?.title}`)
+        data?.summary && setSeoDescription(getShortenedString(deleteHtmlTags(data.summary), 150))
+      } else {
+        setSeoTitle(maintexts.podcast_not_found)
+        setSeoDescription(maintexts.podcast_not_found_description)
+      }
     })
+    /* eslint-disable-next-line */
   }, [podcastId])
 
   return (
@@ -48,6 +57,9 @@ export default function PodcastDetail(props: WebSectionProps) {
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOST}/podcast/${podcastId}`} />
+        {((!isLoading && !podcastDetail) || (router.asPath !== `/podcast/${podcastId}`)) && (
+          <meta name="robots" content="noindex, nofollow, noarchive" />
+        )}
       </Head>
       <div className="grid grid-cols-1 place-items-center">
         <div className="w-full max-w-screen-xl px-4 py-16">
