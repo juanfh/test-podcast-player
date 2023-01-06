@@ -6,6 +6,7 @@ export interface ButtonProps {
   format?: "button" | "link"
   icon?: IconName
   label?: string
+  className?: string
   onClick?: () => void
 }
 
@@ -19,18 +20,18 @@ export const ButtonContent = ({ icon, label }: ButtonProps) => {
   )
 }
 
-export const Button = ({ format = "button", icon, label, onClick }: ButtonProps) => {
+export const Button = ({ format = "button", icon, label, className = "", onClick }: ButtonProps) => {
 
-  const className = "focus:outline-none px-5 py-2 text-sm font-normal text-white rounded bg-fuchsia-700 hover:bg-fuchsia-900 transition-colors duration-300"
+  const buttonStyle = `focus:outline-none px-5 py-2 text-sm font-normal text-white rounded bg-fuchsia-700 hover:bg-fuchsia-900 transition-colors duration-300 ${className}`
 
   return (
     <>
       {format === "button" ? (
-        <button className={className} onClick={onClick} >
+        <button className={buttonStyle} onClick={onClick} >
           <ButtonContent icon={icon} label={label} />
         </button>
       ) : (
-        <div className={className} onClick={onClick} >
+        <div className={buttonStyle} onClick={onClick} >
           <ButtonContent icon={icon} label={label} />
         </div>
       )}

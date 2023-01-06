@@ -15,6 +15,7 @@ import { PodcastDetailCard } from "../../../../../components/podcast/PodcastDeta
 import { PodcastEpisodeDetailCard } from "../../../../../components/podcast/PodcastEpisodeDetailCard"
 import { Loader } from "../../../../../components/common/Loader"
 import { PodcastError } from "../../../../../components/common/PodcastError"
+import { Button } from "../../../../../components/common/Button"
 
 export default function EpisodeDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -80,10 +81,15 @@ export default function EpisodeDetail(props: WebSectionProps) {
             </div>
           )}
           {!isLoading && podcastDetail && episodeDetail && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-              <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
-              <PodcastEpisodeDetailCard episodeDetail={episodeDetail} />
-            </div>
+            <>
+              <div className="w-full flex flex-col items-end mb-4">
+                <Button icon="rotate-back" label={maintexts.back_to_episodes_list} className="w-full sm:w-auto" onClick={() => router.back()} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
+                <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
+                <PodcastEpisodeDetailCard episodeDetail={episodeDetail} />
+              </div>
+            </>
           )}
         </div>
       </div>

@@ -21,5 +21,7 @@
   "custom404_subtitle": "La página que buscas no existe",
   "go_homepage": "Ir a la página de inicio",
   "podcast_not_found": "Podcast no encontrado",
-  "podcast_not_found_description": "El podcast que buscas no existe o ha sido eliminado"
+  "podcast_not_found_description": "El podcast que buscas no existe o ha sido eliminado",
+  "back_to_podcasts_list": "Volver a la lista de podcasts",
+  "back_to_episodes_list": "Volver a la lista de episodios"
 }
