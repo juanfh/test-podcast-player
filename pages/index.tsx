@@ -82,7 +82,7 @@ export default function IndexApp(props: WebSectionProps) {
           )}
           {!isLoading && podcastList.length > 0 && (
             <>
-              <SearchInput value={searchValue} maintexts={maintexts} onChange={handleChangeSearch} />
+              <SearchInput value={searchValue} maintexts={maintexts} onChange={handleChangeSearch} className="mb-4" />
               {filteredPodcastList?.length > 0 ? (
                 <>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">

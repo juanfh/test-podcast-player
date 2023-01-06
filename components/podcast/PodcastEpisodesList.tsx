@@ -1,9 +1,13 @@
 import Link from "next/link"
-import { PodcastWithEpisodesProps } from "../../types/podcast"
+import { useEffect, useState } from "react"
+
+import { PodcastEpisodeProps, PodcastWithEpisodesProps } from "../../types/podcast"
+
 import { formatDate } from "../../utils/formatDate"
 import { formatSecondsToHours } from "../../utils/formatSecondsToHours"
-import { Icon } from "../common/Icon"
 
+import { Icon } from "../common/Icon"
+import { SearchInput } from "../common/SearchInput"
 
 export interface PodcastEpisodesListProps {
   podcastDetail: PodcastWithEpisodesProps
@@ -13,10 +17,35 @@ export interface PodcastEpisodesListProps {
 
 export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: PodcastEpisodesListProps) => {
 
+  const [searchValue, setSearchValue] = useState<string>("")
+  const [filteredEpisodes, setFilteredEpisodes] = useState<PodcastEpisodeProps[]>([] as PodcastEpisodeProps[])
+
+  const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const search = event.target.value
+    setSearchValue(search)
+  }
+
+  const filterEpisodesList = () => {
+    return podcastDetail.episodes.filter((episode: PodcastEpisodeProps) => {
+      return episode.title.toLowerCase().includes(searchValue.toLowerCase())
+    })
+  }
+
+  useEffect(() => {
+    if (searchValue.length > 0) {
+      const filteredEpisodesList = filterEpisodesList()
+      setFilteredEpisodes(filteredEpisodesList)
+    } else {
+      setFilteredEpisodes(podcastDetail.episodes)
+    }
+    /* eslint-disable-next-line */
+  }, [searchValue])
+
   return (
     <div className="w-full sm:col-span-2">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4">
-        <div className="uppercase text-xl font-bold text-fuchsia-800">{maintexts.episodes}: {podcastDetail.episodes.length}</div>
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden p-4 mb-4 sm:flex sm:justify-between sm:items-center">
+        <div className="uppercase text-center sm:text-left text-lg font-bold text-fuchsia-800 pb-2 sm:pb-0">{podcastDetail.episodes.length} {maintexts.episodes}</div>
+        <SearchInput value={searchValue} maintexts={maintexts} onChange={handleChangeSearch} />
       </div>
       <div className=" bg-white rounded-lg shadow-lg overflow-hidden p-4">
         <div className="grid grid-cols-1">
@@ -34,7 +63,7 @@ export const PodcastEpisodesList = ({ podcastDetail, locale, maintexts }: Podcas
               <div className="text-sm">{maintexts.duration}</div>
             </div>
           </div>
-          {podcastDetail.episodes.map((episode, index) => (
+          {filteredEpisodes.map((episode, index) => (
             <div key={episode.id} className={`grid grid-cols-1 md:grid-cols-6 items-center ${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} p-2`}>
               <Link href={`/podcast/${podcastDetail.id}/episode/${episode.id}`} className="md:col-span-4">
                 <div className="group text-sm text-fuchsia-600 flex items-center gap-2 pb-1 md:pb-0">
