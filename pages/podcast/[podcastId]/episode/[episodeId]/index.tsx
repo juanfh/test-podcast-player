@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { GetStaticPaths } from "next"
 
@@ -99,7 +100,9 @@ export default function EpisodeDetail(props: WebSectionProps) {
                   <Icon icon="angles-right" />
                   <Breadcrumb url={`/podcast/${podcastId}/episode/${episodeId}`} title={episodeDetail.title} position="3" />
                 </Breadcrumbs>
-                <Button icon="rotate-back" label={maintexts.back_to_episodes_list} className="w-full sm:w-auto text-xs px-2 py-1" onClick={() => router.back()} />
+                <Link href={`/podcast/${podcastId}`}>
+                  <Button icon="rotate-back" label={maintexts.back_to_episodes_list} className="w-full sm:w-auto text-xs px-2 py-1" />
+                </Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6" itemScope itemType="https://schema.org/PodcastEpisode">
                 <meta itemProp="url" content={schemaUrl} />
