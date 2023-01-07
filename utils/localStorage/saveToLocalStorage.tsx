@@ -11,6 +11,6 @@ export const saveToLocalStorage = (name: string, value: any) => {
   try {
     localStorage.setItem('WebLocalParams', JSON.stringify(newParams))
   } catch (error) {
-    console.log(error)
+    //console.log(error)
   }
 }

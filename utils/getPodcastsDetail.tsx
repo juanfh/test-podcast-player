@@ -30,7 +30,7 @@ export const getPodcastsDetail = async (podcastId: string) => {
           return mappedPodcastDetail
         }
       } catch (error) {
-        console.log(error)
+        //console.log(error)
         return undefined
       }
     } else {

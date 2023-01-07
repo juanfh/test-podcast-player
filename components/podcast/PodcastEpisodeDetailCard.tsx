@@ -11,7 +11,6 @@ export interface PodcastEpisodeDetailCardProps {
 }
 
 export const PodcastEpisodeDetailCard = ({ episodeDetail }: PodcastEpisodeDetailCardProps) => {
-  console.log(episodeDetail)
   const [description, setDescription] = useState<string>("")
   useEffect(() => {
     setDescription(episodeDetail.content)
