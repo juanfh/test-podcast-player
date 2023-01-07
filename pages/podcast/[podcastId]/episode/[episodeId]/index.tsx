@@ -16,6 +16,9 @@ import { PodcastEpisodeDetailCard } from "../../../../../components/podcast/Podc
 import { Loader } from "../../../../../components/common/Loader"
 import { PodcastError } from "../../../../../components/common/PodcastError"
 import { Button } from "../../../../../components/common/Button"
+import { Icon } from "../../../../../components/common/Icon"
+import Link from "next/link"
+import { Breadcrumbs } from "../../../../../components/common/Breadcrumbs"
 
 export default function EpisodeDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -69,7 +72,7 @@ export default function EpisodeDetail(props: WebSectionProps) {
         )}
       </Head>
       <div className="grid grid-cols-1 place-items-center">
-        <div className="w-full max-w-screen-xl px-4 py-16">
+        <div className="w-full max-w-screen-xl px-4 pt-8 pb-16">
           {isLoading && (
             <div className="grid grid-cols-1 place-items-center">
               <Loader />
@@ -82,8 +85,15 @@ export default function EpisodeDetail(props: WebSectionProps) {
           )}
           {!isLoading && podcastDetail && episodeDetail && (
             <>
-              <div className="w-full flex flex-col items-end mb-4">
-                <Button icon="rotate-back" label={maintexts.back_to_episodes_list} className="w-full sm:w-auto" onClick={() => router.back()} />
+              <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+                <Breadcrumbs>
+                  <Link href="/">{maintexts.home}</Link>
+                  <Icon icon="angles-right" />
+                  <Link href={`/podcast/${podcastId}`}>{podcastDetail.title}</Link>
+                  <Icon icon="angles-right" />
+                  <Link href={`/podcast/${podcastId}/episode/${episodeId}`}>{episodeDetail.title}</Link>
+                </Breadcrumbs>
+                <Button icon="rotate-back" label={maintexts.back_to_episodes_list} className="w-full sm:w-auto text-xs px-2 py-1" onClick={() => router.back()} />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
                 <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
