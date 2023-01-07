@@ -17,8 +17,8 @@ import { Loader } from "../../../../../components/common/Loader"
 import { PodcastError } from "../../../../../components/common/PodcastError"
 import { Button } from "../../../../../components/common/Button"
 import { Icon } from "../../../../../components/common/Icon"
-import Link from "next/link"
 import { Breadcrumbs } from "../../../../../components/common/Breadcrumbs"
+import { Breadcrumb } from "../../../../../components/common/Breadcrumb"
 
 export default function EpisodeDetail(props: WebSectionProps) {
   const { section, pageContent, locale } = props
@@ -36,6 +36,9 @@ export default function EpisodeDetail(props: WebSectionProps) {
   const [seoTitle, setSeoTitle] = useState<string>("")
   const [seoDescription, setSeoDescription] = useState<string>("")
 
+  const [schemaName, setSchemaName] = useState<string>("")
+  const [schemaUrl, setSchemaUrl] = useState<string>("")
+
   useEffect(() => {
     getPodcastsDetail(podcastId).then(data => {
       setIsLoading(false)
@@ -47,6 +50,9 @@ export default function EpisodeDetail(props: WebSectionProps) {
       if (data) {
         setSeoTitle(`${data?.author} - ${data?.title} ${episode?.title ? `- ${episode?.title}` : maintexts.podcast_not_found}`)
         episode?.content && setSeoDescription(getShortenedString(deleteHtmlTags(episode.content), 150))
+
+        setSchemaName(episode?.title || "")
+        setSchemaUrl(`${process.env.NEXT_PUBLIC_HOST}/podcast/${podcastId}/episode/${episodeId}`)
       } else {
         setSeoTitle(maintexts.podcast_not_found)
         setSeoDescription(maintexts.podcast_not_found_description)
@@ -87,15 +93,17 @@ export default function EpisodeDetail(props: WebSectionProps) {
             <>
               <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
                 <Breadcrumbs>
-                  <Link href="/">{maintexts.home}</Link>
+                  <Breadcrumb url="/" title={maintexts.home} position="1" />
                   <Icon icon="angles-right" />
-                  <Link href={`/podcast/${podcastId}`}>{podcastDetail.title}</Link>
+                  <Breadcrumb url={`/podcast/${podcastId}`} title={podcastDetail.title} position="2" />
                   <Icon icon="angles-right" />
-                  <Link href={`/podcast/${podcastId}/episode/${episodeId}`}>{episodeDetail.title}</Link>
+                  <Breadcrumb url={`/podcast/${podcastId}/episode/${episodeId}`} title={episodeDetail.title} position="3" />
                 </Breadcrumbs>
                 <Button icon="rotate-back" label={maintexts.back_to_episodes_list} className="w-full sm:w-auto text-xs px-2 py-1" onClick={() => router.back()} />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6" itemScope itemType="https://schema.org/PodcastEpisode">
+                <meta itemProp="url" content={schemaUrl} />
+                <meta itemProp="name" content={schemaName} />
                 <PodcastDetailCard podcastDetail={podcastDetail} section={section} />
                 <PodcastEpisodeDetailCard episodeDetail={episodeDetail} />
               </div>
