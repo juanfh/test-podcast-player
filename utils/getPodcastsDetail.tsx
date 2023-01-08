@@ -25,7 +25,7 @@ export const getPodcastsDetail = async (podcastId: string) => {
       }).then(res => res.json()).then(data => data.data ? data.data : data)
 
       if (feed) {
-        const mappedPodcastDetail = mapPodcastDetail(podcastId, feed)
+        const mappedPodcastDetail = mapPodcastDetail(podcastId, newPodcastDetail?.results[0], feed)
         saveToLocalStorage(`podcastDetail-${podcastId}}`, mappedPodcastDetail)
         return mappedPodcastDetail
       }
