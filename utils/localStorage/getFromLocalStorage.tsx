@@ -3,12 +3,12 @@ import { getAllFromLocalStorage } from "./getAllFromLocalStorage"
 export const getFromLocalStorage = (name: string) => {
   const now = new Date()
   const params = getAllFromLocalStorage()
-  if (params && params[name]) {
-    if (now.getTime() > params.expiry) {
+  if (params && params[name]?.value) {
+    if (now.getTime() > params[name].expiry) {
       localStorage.removeItem('WebLocalParams')
       return false
     }
-    return params[name]
+    return params[name].value
   }
   return false
 }

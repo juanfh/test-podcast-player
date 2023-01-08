@@ -6,7 +6,7 @@ import { mapPodcastDetail } from '../mappers/mapPodcasts'
 
 export const getPodcastsDetail = async (podcastId: string) => {
 
-  const podcastLocalDetail = getFromLocalStorage(`podcastDetail-${podcastId}}`)
+  const podcastLocalDetail = getFromLocalStorage(`podcastDetail-${podcastId}`)
 
   if (podcastLocalDetail) {
     return podcastLocalDetail
@@ -26,7 +26,7 @@ export const getPodcastsDetail = async (podcastId: string) => {
 
       if (feed) {
         const mappedPodcastDetail = mapPodcastDetail(podcastId, newPodcastDetail?.results[0], feed)
-        saveToLocalStorage(`podcastDetail-${podcastId}}`, mappedPodcastDetail)
+        saveToLocalStorage(`podcastDetail-${podcastId}`, mappedPodcastDetail)
         return mappedPodcastDetail
       }
     } catch (error) {
